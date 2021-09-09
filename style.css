@@ -1,0 +1,93 @@
+*,*::before,*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: baskerville;
+  src: url('./fonts/BaskervilleBoldItalicBT.ttf');
+}
+body{
+  font-family: baskerville;
+  background-image: url('./images/background_wood.png');
+}
+.head img{
+  width: 100%;
+}
+.head h1{
+  text-align: center;
+  padding: 50px;
+}
+:where(.date, .location) h3{
+  text-align: center;
+  margin: 10px;
+}
+/* DATE AREA */
+
+.date h3:nth-child(2){
+  font-size: 2.5rem;
+}
+
+/* FORM AREA */
+.presence{
+  background: #444;
+  color: white;
+  font-family: sans-serif;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form > * {
+  text-align: center;
+  margin: 10px 0;
+  color: white;
+}
+.confirm, .quantity{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+:where(.confirm, .quantity, .name) h3{
+  width: 100%;
+  padding: 1rem;
+}
+:where(.confirm, .quantity) label{
+  background: rgba(255,255,255,.2);
+  border-radius: 1rem;
+  padding: .6rem 1.5rem;
+  transition: all .5s;
+  cursor: pointer;
+}
+input[type=radio]{
+  display: none;
+}
+input[type=radio]:checked + label{
+  background: #137c13;
+}
+#no:checked + label{
+  background: #9a2c2c;
+}
+#perhaps:checked + label{
+  background: #848436;
+}
+#name{
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem;
+  outline: none;
+  background: #555;
+  color: white;
+}
+#name::placeholder{
+  color: rgb(163, 163, 163);
+}
+input[type=submit]{
+  padding: 10px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.2);
+  font-weight: 600;
+  margin-bottom: 40px;
+}
