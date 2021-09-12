@@ -1,0 +1,38 @@
+@media screen and (min-width:700px) {
+  body{
+    display: flex;
+    flex-direction: column;
+    margin: 0 35vw 10vw 0;
+  }
+
+  body > *{
+    margin-top: 0;
+  }
+
+  .logo{
+    left: 35%;
+  }
+
+  .presence{
+    grid-area: presence;
+    width: 35vw;
+    position: fixed;
+    right: 0;
+    height: 100vh;
+  }
+  .form{
+    padding: 20px;
+  }
+  .confirm, .quantity{
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 60px 0;
+  }
+  :where(.confirm, .quantity, .name) h3{
+    width: 100%;
+  }
+  :where(.confirm, .quantity) label{
+    padding: 5px 15px;
+  }
+}
