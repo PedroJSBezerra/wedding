@@ -2,7 +2,7 @@
   body{
     display: flex;
     flex-direction: column;
-    margin: 0 35vw 10vw 0;
+    margin: 0 35vw 0 0;
   }
 
   body > *{
@@ -10,7 +10,7 @@
   }
 
   .logo{
-    left: 35%;
+    left: 32%;
   }
 
   .presence{
@@ -34,5 +34,12 @@
   }
   :where(.confirm, .quantity) label{
     padding: 5px 15px;
+  }
+
+
+
+
+  footer{
+    margin-top: 80px;
   }
 }

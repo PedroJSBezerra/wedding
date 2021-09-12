@@ -75,6 +75,7 @@ body > *{
 
 .icon_weeding{
   width: 160px;
+  margin-top: 40px;
 }
 
 
@@ -143,4 +144,16 @@ input[type=submit]{
   margin: auto;
   font-size: 1.2rem;
   border-radius: 5px;
+}
+
+
+
+
+
+footer{
+  background: #4F4F4F;
+  color: rgba(255,255,255,.6);
+  margin-top: 0;
+  padding: 40px;
+  font-family: sans-serif;
 }
