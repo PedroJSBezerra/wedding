@@ -52,7 +52,7 @@ export let cama = [
     checked: false
   },
   {
-    name: 'Jogo de coxade cama',
+    name: 'Jogo de coxa de cama',
     photoUrl: '',
     checked: false
   },
