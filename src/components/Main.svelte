@@ -53,8 +53,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('/images/frame_flower.png');
-    background-size: 100%;
+    background: url('/images/frame_flower (1).png');
+    background-size: 360px;
+    background-repeat: no-repeat;
+    background-position: 50% -6px;
+    padding: 42px 0 140px 0;
   }
   .invitation >:not(:first-child){
     display: flex;
@@ -69,5 +72,6 @@
   }
   .logo h1:nth-child(2){
     font-family: Aniyah;
+    margin: 0;
   }
 </style>
