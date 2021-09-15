@@ -1,16 +1,20 @@
 <script>
+
 	import Loading from "./components/Loading.svelte";
 	import Login from "./components/Login.svelte";
 	import Main from "./components/Main.svelte";
 	import Gifts_list from "./components/Gifts_list.svelte"
+	import Form from "./components/Form.svelte"
+	
 	import {loged} from './stores/authentication'
 
 </script>
 
 <div class="app">
 	{#if $loged === true}
-		<Main />
-		<Gifts_list />
+		<!-- <Main />
+		<Gifts_list /> -->
+		<Form />
 	{:else if $loged === false}
 		<Login />
 	{:else if $loged === 'loading'}

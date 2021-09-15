@@ -19,7 +19,7 @@
   </div>
   
   <ul class="cozinha">
-    <h3>Cozinha</h3>
+    <h1>Cozinha</h1>
     {#each cozinha as item}
       <li>
         <label>
@@ -32,7 +32,7 @@
   </ul>
 
   <ul class="cama">
-    <h3>Cama</h3>
+    <h1>Cama</h1>
     {#each cama as item}
       <li>
         <label>
@@ -45,7 +45,7 @@
   </ul>
 
   <ul class="banho">
-    <h3>Banho</h3>
+    <h1>Banho</h1>
     {#each banho as item}
       <li>
         <label>
@@ -61,36 +61,29 @@
 
 <style>
   .gifts_list{
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background: #fff;
     top: 0;
     overflow-y: auto;
 		background-image: url(/images/bg_white_wood.png);
   }
   h1{
     text-align: center;
-  }
-  h3{
     width: 100%;
-    text-align: center;
   }
   ul{
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    justify-content: center;
+    justify-content: space-around;
   }
   li{
     list-style-type: none;
-    margin: 10px 5px;
+    margin: 20px;
   }
   label{
     display: flex;
     flex-direction: column;
-    width: 140px;
-    min-height: 100px;
+    width: 90px;
+    min-height: 200px;
     padding: 20px;
     align-items: center;
     border-radius: 10px;
