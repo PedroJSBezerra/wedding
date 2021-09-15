@@ -1,11 +1,10 @@
 <script>
 
-  let presence = ''
-  let quantity = ''
+  let presence = 'yes'
+  let quantity = '0'
   let name = ''
 
   const handleSubmit = (e) => {
-    console.log(e)
     console.log(presence)
     console.log(quantity)
     console.log(name)
@@ -15,7 +14,7 @@
 
 <section>
 
-  <form action="" method="POST" on:submit={handleSubmit}>
+  <form action="" on:submit|preventDefault={handleSubmit}>
     <div class="confirm">
       <h3>Confirmar presença?</h3>
       <input type="radio" name="presence" bind:group={presence} id="yes" value="yes" checked>
@@ -35,7 +34,7 @@
     </div>
 
     <div class="name">
-      <label for="name">Digite seu nome</label>
+      <h3>Digite seu nome</h3>
       <input id="name" placeholder="Digite seu nome aqui..."  bind:value={name} type="text">
     </div>
 
@@ -45,13 +44,51 @@
 </section>
 
 <style>
+  section{
+    background: url(/images/frame_flower_gold.png);
+    background-repeat: no-repeat;
+    background-position: 50% 0px;
+    background-size: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #806D39;
+  }
+  form{
+    width: 230px;
+    padding: 62px 0;
+  }
+  form > *{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 14px;
+  }
+  form > * h3{
+    width: 100%;
+    margin: 5px;
+  }
+  form > * label{
+    padding: 6px 14px;
+    margin: 4px;
+    border-radius: 6px;
+    border: 1px solid #806D39;
+    cursor: pointer;
+  }
   input[type=radio]{
     display: none;
   }
   input[type=radio]:checked + label{
     background: green;
+    color: white;
   }
   input[value=no]:checked + label{
     background: red;
+    color: white;
+  }
+  input[type=submit]{
+    margin: 65px auto;
   }
 </style>

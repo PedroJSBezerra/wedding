@@ -12,8 +12,8 @@
 
 <div class="app">
 	{#if $loged === true}
-		<!-- <Main />
-		<Gifts_list /> -->
+		<Main />
+		<Gifts_list />
 		<Form />
 	{:else if $loged === false}
 		<Login />
@@ -23,7 +23,9 @@
 </div>
 
 <style>
-	.app{
+	.app{    
 		background-image: url(/images/bg_white_wood.png);
+    background-repeat: repeat-y;
+    background-size: 100%;
 	}
 </style>
