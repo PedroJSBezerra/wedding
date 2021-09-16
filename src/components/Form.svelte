@@ -81,11 +81,11 @@
     display: none;
   }
   input[type=radio]:checked + label{
-    background: green;
+    background: #66c766;
     color: white;
   }
   input[value=no]:checked + label{
-    background: red;
+    background: #e66a6a;
     color: white;
   }
   input[type=submit]{

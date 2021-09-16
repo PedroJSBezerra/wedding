@@ -13,7 +13,6 @@
 <section class="invitation">
 
   <div class="logo">
-    <h1>Convite</h1>
     <h1>Tayane <br> e Pedro</h1>
   </div>
 
@@ -70,7 +69,7 @@
   .logo{
     text-align: center;
   }
-  .logo h1:nth-child(2){
+  .logo h1:nth-child(1){
     font-family: Aniyah;
     margin: 0;
   }
