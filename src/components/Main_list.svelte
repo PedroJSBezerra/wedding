@@ -1,22 +1,10 @@
 <script>
   import Icon_info from '../icons/Icon_info.svelte'
-  import Icon_close from '../icons/icon_close.svelte'
-  import { cozinha, cama, banho} from '../stores/whishlist'
-  import {open} from '../stores/liststate'
+  import { cozinha, cama, banho } from '../stores/whishlist'
+  import { open } from '../stores/liststate'
 </script>
 
-  <div class="btn_gift">
-    <button on:click={() => open.set(true)}>Mostrar lista de presentes</button>
-  </div>
-
-  <section class={$open? 'gifts_list':'gifts_list_close'}>
-    
-    <div class="header">
-      <h1>Lista de presentes</h1>
-      <div class="btn_close" on:click={() => open.set(false)}>  
-        <Icon_close />
-      </div>
-    </div>
+  <section class={$open? 'list':'list_close'}>
 
     <div class="info">
       Opcional <br>
@@ -73,17 +61,11 @@
   </section>
 
 <style>
-  .gifts_list{
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow-y: auto;
+  .list{
+    display: inline-block;
     background: white;
-    margin-top: 65px;
-    transition: all .5s;
   }
-  .gifts_list_close{
+  .list_close{
     display: none;
   }
   h1{
@@ -136,30 +118,5 @@
   .info{
     text-align: center;
     margin: 40px;
-  }
-
-  .header{
-    box-shadow: 2px 2px 7px #999;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 4;
-    background: white;
-    width: 100%;
-    height: 65px;
-  }
-
-  .btn_gift{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-  }
-  .btn_close{
-    background: white;
-    display: flex;
-    padding: 10px;
-    border-radius: 50%;
   }
 </style>

@@ -1,5 +1,7 @@
 <script>
 
+  import { open as liststate } from '../stores/liststate'
+
   let presence = 'yes'
   let quantity = '0'
   let name = ''
@@ -12,7 +14,7 @@
 
 </script>
 
-<section>
+<section class={$liststate? 'close':''}>
 
   <form action="" on:submit|preventDefault={handleSubmit}>
     <div class="confirm">
@@ -50,9 +52,9 @@
     background-position: 50% 0px;
     background-size: 360px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     color: #806D39;
+    justify-content: center;
   }
   form{
     width: 230px;
@@ -90,5 +92,8 @@
   }
   input[type=submit]{
     margin: 65px auto;
+  }
+  .close{
+    display: none;
   }
 </style>

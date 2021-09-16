@@ -1,24 +1,19 @@
 <script>
 
-	import Loading from "./components/Loading.svelte";
-	import Login from "./components/Login.svelte";
-	import Main from "./components/Main.svelte";
-	import Gifts_list from "./components/Gifts_list.svelte"
-	import Form from "./components/Form.svelte"
-	import {open as listOpen} from './stores/liststate'
+	import Header from "./components/_Header.svelte";
+	import Main from "./components/_Main.svelte";
+
+	import Login from "./components/_Login.svelte";
+	import Loading from "./components/_Loading.svelte";
+	
 	import {loged} from './stores/authentication'
 
 </script>
 
-<div class="{$listOpen? 'app noscroll':'app'}">
+<div class="app">
 	{#if $loged === true}
-		<header>
-			<h1>Convite</h1>
-		</header>
+		<Header />
 		<Main />
-
-		<Gifts_list />
-		<Form />
 	{:else if $loged === false}
 		<Login />
 	{:else if $loged === 'loading'}
@@ -27,24 +22,8 @@
 </div>
 
 <style>
-	.app{    
-		background-image: url(/images/bg_white_wood.png);
-    background-repeat: repeat-y;
-    background-size: 100%;
-		margin-top: 65px;
-	}
-	header{
-		display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    box-shadow: 2px 2px 8px #999;
-    position: fixed;
-    height: 65px;
-    top: 0;
-    width: 100%;
-	}
-	.noscroll{
+	.app{
+		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
 	}

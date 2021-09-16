@@ -3,6 +3,7 @@
   import Icon_calendar from '../icons/icon_calendar.svelte'
   import Icon_map from '../icons/icon_map.svelte'
   import Icon_clock_flow from '../icons/icon_clock_flow.svelte'
+  import { open as liststate} from '../stores/liststate'
 
   let days = 49
   let hours = 23
@@ -10,7 +11,7 @@
   let seconds = 59
 </script>
 
-<section class="invitation">
+<section class={$liststate? 'info close':'info'}>
 
   <div class="logo">
     <h1>Tayane <br> e Pedro</h1>
@@ -47,7 +48,7 @@
 </section>
 
 <style>
-  .invitation{
+  .info{
     color: #806D39;
     display: flex;
     flex-direction: column;
@@ -55,10 +56,12 @@
     background: url('/images/frame_flower (1).png');
     background-size: 360px;
     background-repeat: no-repeat;
-    background-position: 50% -6px;
-    padding: 42px 0 140px 0;
+    background-position: center;
+    /* padding: 42px 0 140px 0; */
+    height: 720px;
+    justify-content: center;
   }
-  .invitation >:not(:first-child){
+  .info >:not(:first-child){
     display: flex;
     align-items: center;
     width: 250px;
@@ -72,5 +75,8 @@
   .logo h1:nth-child(1){
     font-family: Aniyah;
     margin: 0;
+  }
+  .close{
+    display: none;
   }
 </style>
