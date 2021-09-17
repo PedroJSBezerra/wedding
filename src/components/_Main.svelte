@@ -11,7 +11,7 @@
 <style>
   .scroll{
     overflow-y: auto;
-    height: 100%;
     width: 100%;
+    height: calc(100vh - 60px);
   }
 </style>

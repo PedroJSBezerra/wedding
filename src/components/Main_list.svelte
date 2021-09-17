@@ -63,7 +63,21 @@
 <style>
   .list{
     display: inline-block;
-    background: white;
+    background: url(/images/bg_white_wood.png);
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: contain;
+    animation: show .4s ease-in-out;
+  }
+  @keyframes show{
+    from{
+      position: relative;
+      bottom: 100%;
+      display: none;
+    }
+    to{
+      bottom: 0;
+    }
   }
   .list_close{
     display: none;

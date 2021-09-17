@@ -1,7 +1,5 @@
 <script>
 
-  import { open as liststate } from '../stores/liststate'
-
   let presence = 'yes'
   let quantity = '0'
   let name = ''
@@ -14,9 +12,9 @@
 
 </script>
 
-<section class={$liststate? 'close':''}>
+<section>
 
-  <form action="" on:submit|preventDefault={handleSubmit}>
+  <form class="background" action="" on:submit|preventDefault={handleSubmit}>
     <div class="confirm">
       <h3>Confirmar presença?</h3>
       <input type="radio" name="presence" bind:group={presence} id="yes" value="yes" checked>
@@ -47,18 +45,27 @@
 
 <style>
   section{
+    color: #806D39;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    height: 590px;
+    border-radius: 30px;
+    box-shadow: 2px 3px 10px 0px #999;
+  }
+  .background{
     background: url(/images/frame_flower_gold.png);
     background-repeat: no-repeat;
     background-position: 50% 0px;
     background-size: 360px;
-    display: flex;
-    align-items: center;
-    color: #806D39;
-    justify-content: center;
-  }
-  form{
-    width: 230px;
-    padding: 62px 0;
+    background-position: center;
   }
   form > *{
     display: flex;
@@ -66,7 +73,11 @@
     align-items: center;
     justify-content: space-around;
     text-align: center;
-    margin-top: 14px;
+    width: 219px;
+    margin-top: 12px;
+  }
+  .confirm{
+    margin-top: 70px;
   }
   form > * h3{
     width: 100%;
@@ -92,8 +103,5 @@
   }
   input[type=submit]{
     margin: 65px auto;
-  }
-  .close{
-    display: none;
   }
 </style>

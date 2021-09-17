@@ -24,14 +24,20 @@
 
 <style>
 	header{
+    color: #806D39;
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
     width: 100%;
+    height: 60px;
     box-shadow: 0px 0px 13px #333;
     position: relative;
 	}
+  h1{
+    flex: 1;
+    text-align: center;
+  }
   .btn_close{
     background: white;
     display: flex;
