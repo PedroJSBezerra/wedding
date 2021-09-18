@@ -58,7 +58,7 @@
     width: 360px;
     height: 590px;
     border-radius: 30px;
-    box-shadow: 2px 3px 10px 0px #999;
+    /* box-shadow: 2px 3px 10px 0px #999; */
   }
   .background{
     background: url(/images/frame_flower_gold.png);
@@ -75,9 +75,6 @@
     text-align: center;
     width: 219px;
     margin-top: 12px;
-  }
-  .confirm{
-    margin-top: 70px;
   }
   form > * h3{
     width: 100%;
@@ -100,8 +97,5 @@
   input[value=no]:checked + label{
     background: #e66a6a;
     color: white;
-  }
-  input[type=submit]{
-    margin: 65px auto;
   }
 </style>

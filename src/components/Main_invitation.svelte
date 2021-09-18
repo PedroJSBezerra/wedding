@@ -6,7 +6,7 @@
 </script>
 
 
-<section class={$liststate? "close":"invitation background"}>
+<section class={$liststate? "close":"invitation"}>
   <Invitation_info />
   <Invitation_list_toggle />
   <Invitation_form />
@@ -21,11 +21,11 @@
     justify-content: center;
     overflow: hidden;
   }
-	.background{
+	/* .background{
     background-image: url(/images/bg_white_wood.png);
     background-repeat: repeat-y;
     background-size: 100%;
-	}
+	} */
   .close{
     display: none;
   }

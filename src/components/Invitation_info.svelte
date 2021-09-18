@@ -56,7 +56,7 @@
     justify-content: center;
     width: 360px;
     border-radius: 30px;
-    box-shadow: 2px 3px 10px 0px #999;
+    /* box-shadow: 2px 3px 10px 0px #999; */
   }
   .background{
     background: url('/images/frame_flower (1).png');

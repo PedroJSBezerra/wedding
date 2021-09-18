@@ -4,7 +4,7 @@
   import { open } from '../stores/liststate'
 </script>
 
-  <section class={$open? 'list':'list_close'}>
+  <section class={$open? 'list background':'list background close'}>
 
     <div class="info">
       Opcional <br>
@@ -63,10 +63,6 @@
 <style>
   .list{
     display: inline-block;
-    background: url(/images/bg_white_wood.png);
-    background-position: center;
-    background-repeat: repeat-y;
-    background-size: contain;
     animation: show .4s ease-in-out;
   }
   @keyframes show{
@@ -79,7 +75,13 @@
       bottom: 0;
     }
   }
-  .list_close{
+  .background{
+    background: url(/images/bg_white_wood.png);
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: contain;
+  }
+  .list.close{
     display: none;
   }
   h1{

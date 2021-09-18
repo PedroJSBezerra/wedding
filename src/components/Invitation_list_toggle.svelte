@@ -1,4 +1,5 @@
 <script>
+  import Icon_gift_box from '../icons/icon_gift_box.svelte'
   import { open } from '../stores/liststate'
   import {scrollTop} from '../stores/functions'
 
@@ -9,12 +10,17 @@
 </script>
 
 <div class={$open? 'close':'list_toggle'}>
-  <button on:click={handletoggle}>Mostrar lista de presentes</button>
+  <button on:click={handletoggle}>
+    <div class="icon">
+      <Icon_gift_box />
+    </div>
+    Mostrar lista de presentes
+  </button>
 </div>
 
 <style>
   .list_toggle{
-    box-shadow: 2px 2px 16px #999;
+    /* box-shadow: 2px 2px 16px #999; */
     border-radius: 30px;
     margin: 40px 0;
 
@@ -27,5 +33,13 @@
   }
   .close{
     display: none;
+  }
+  button{
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+  }
+  .icon{
+    width: 40px;
   }
 </style>
