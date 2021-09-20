@@ -1,5 +1,5 @@
 <script>
-  import {login} from '../stores/authentication'
+  import {login} from '../../stores/authentication'
 </script>
 
 <div class="login">

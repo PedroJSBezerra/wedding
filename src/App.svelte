@@ -1,10 +1,7 @@
 <script>
-
-	import Header from "./components/_Header.svelte";
-	import Main from "./components/_Main.svelte";
-
-	import Login from "./components/_Login.svelte";
-	import Loading from "./components/_Loading.svelte";
+	import Main from "./components/main/Main_.svelte";
+	import Login from "./components/pages/Login_.svelte";
+	import Loading from "./components/pages/Loading_.svelte";
 	
 	import {loged} from './stores/authentication'
 
@@ -12,7 +9,6 @@
 
 <div class="app">
 	{#if $loged === true}
-		<Header />
 		<Main />
 	{:else if $loged === false}
 		<Login />
@@ -22,10 +18,4 @@
 </div>
 
 <style>
-	.app{
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
-		font-size: 1.2rem;
-	}
 </style>

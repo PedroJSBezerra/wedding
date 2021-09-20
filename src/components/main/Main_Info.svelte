@@ -47,36 +47,4 @@
 </section>
 
 <style>
-  .info{
-    color: #806D39;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 720px;
-    justify-content: center;
-    width: 360px;
-    border-radius: 30px;
-    /* box-shadow: 2px 3px 10px 0px #999; */
-  }
-  .background{
-    background: url('/images/frame_flower (1).png');
-    background-size: 360px;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  .info >:not(:first-child){
-    display: flex;
-    align-items: center;
-    width: 250px;
-  }
-  .icon {
-    padding: 20px;
-  }
-  .logo{
-    text-align: center;
-  }
-  .logo h1:nth-child(1){
-    font-family: Aniyah;
-    margin: 0;
-  }
 </style>
