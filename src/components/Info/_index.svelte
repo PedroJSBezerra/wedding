@@ -54,6 +54,7 @@
 
 <style>
   section{
+    scroll-snap-align: start;
     height: 100vh;
   }
   h1{

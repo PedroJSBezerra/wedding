@@ -45,6 +45,7 @@
 
 <style>
   section{
+    scroll-snap-align: start;
     height: 100vh;
     display: flex;
     align-items: center;
