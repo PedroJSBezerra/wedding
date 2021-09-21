@@ -19,7 +19,7 @@
 
 <style>
 	.app{
-		color: rgb(53, 27, 27);
+		color: #5a2626;
 	}
 	.noscroll{
 		width: 100vw;
