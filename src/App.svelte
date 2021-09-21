@@ -1,13 +1,13 @@
 <script>
-	import Main from "./components/main/Main_.svelte";
-	import Login from "./components/pages/Login_.svelte";
-	import Loading from "./components/pages/Loading_.svelte";
+	import Main from "./components/_Main.svelte";
+	import Login from "./components/_Login.svelte";
+	import Loading from "./components/_Loading.svelte";
 	
 	import {loged} from './stores/authentication'
 
 </script>
 
-<div class="app">
+<div class="app noscroll">
 	{#if $loged === true}
 		<Main />
 	{:else if $loged === false}
@@ -18,4 +18,12 @@
 </div>
 
 <style>
+	.app{
+		color: rgb(53, 27, 27);
+	}
+	.noscroll{
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+	}
 </style>
