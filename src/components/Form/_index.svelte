@@ -44,4 +44,61 @@
 </section>
 
 <style>
+  section{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../images/bg_wood.png');
+  }
+  form{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255,255,255,.8);
+    border-radius: 10px;
+    box-shadow: 2px 2px 7px -3px;
+  }
+  form > *{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  form > * h3{
+    width: 100%;
+  }
+  input[type=radio]{
+    display: none;
+  }
+  input[type=radio]:checked + label{
+    background: #73bd73;
+    color: white;
+  }
+  #no:checked + label{
+    background: #e66b6b;
+  }
+  label{
+    display: block;
+    border-radius: 5px;
+    padding: 1rem 2.5rem;
+    cursor: pointer;
+    border: 1px solid;
+    margin: 6px;
+  }
+  .name{
+    margin-top: 3rem;
+  }
+  input[type=text]{
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+  }
+  input[type=submit]{
+    margin-top: 5rem;
+    border-radius: 5px;
+  }
 </style>

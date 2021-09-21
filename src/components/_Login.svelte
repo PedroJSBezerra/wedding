@@ -1,5 +1,6 @@
 <script>
   import Icon_love_message from '../icons/icon_love_message.svelte'
+  import Icon_logo from '../icons/logo.svelte'
   import {login} from '../stores/authentication'
 </script>
 
@@ -11,7 +12,7 @@
     </div>
     <h3>Para acessar o convite faça login</h3>
 
-    <button on:click={login}>Login com Google</button>
+    <button on:click={login}> <Icon_logo />Login com Google</button>
   </div>
 </div>
 
@@ -35,6 +36,10 @@
   }
   button{
     font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
   }
   .bg_wood{
     background: url(../images/bg_wood.png);
