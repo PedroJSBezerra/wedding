@@ -1,8 +1,8 @@
 <script>
-  let days = 49;
-  let hours = 23;
-  let minutes = 59;
-  let seconds = 59;
+  let days
+  let hours
+  let minutes
+  let seconds
   let distance
   let countDownDate = new Date("Oct 30, 2021 19:00:00").getTime()
   

@@ -6,9 +6,9 @@
       <h1 class="title">Tayane <br> e Pedro</h1>
       <div class="icon">
       </div>
-      <p>. . . . vão casar . . . .</p>
-      <h1>30.10.21 </h1><br>
-      <p>. . . . . . . . . .</p><br>
+      <span>. . . . vão casar . . . .</span>
+      <h1>30.10.21 </h1>
+      <span>. . . . . . . . . . . . . . . .</span>
       <p>sábado às 19 horas</p>
 
   </div>
@@ -23,9 +23,14 @@
     text-align: center;
     width: 100%;
     margin: 0;
+    font-size: 2.3rem;
+  }
+  p{
+    margin-bottom: 6.5rem;
   }
   .title{
     font-family: Aniyah;
+    margin-bottom: 1.5rem;
   }
   .bg_wood{
     background: url('../images/bg_wood.png');

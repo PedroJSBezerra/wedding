@@ -24,7 +24,7 @@
 
 <style>
 section{
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   height: 100vh;
 }
 .icon{
