@@ -101,5 +101,6 @@
   input[type=submit]{
     margin-top: 5rem;
     border-radius: 5px;
+    cursor: pointer;
   }
 </style>

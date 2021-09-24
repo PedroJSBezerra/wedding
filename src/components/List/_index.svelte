@@ -1,22 +1,24 @@
 <script>
-  import Icon_info from '../icons/Icon_info.svelte'
-  import { cozinha, cama, banho } from '../stores/whishlist'
-  import { open } from '../stores/liststate'
+  import Icon_info from '../../icons/Icon_info.svelte'
+  import { cozinha, cama, banho } from '../../stores/whishlist'
+  import { open } from '../../stores/liststate'
 </script>
 
   <section class={$open? 'list background':'list background close'}>
 
     <div class="info">
-      Opcional <br>
-      Marque uma ou mais entre as opções de presente, se mudar de ideia é só voltar aqui depois. <br>
-      Se o item estiver riscado é porque alguém já vai dar.
+      <p>Opcional <br>
+        Marque uma ou mais entre as opções de presente, 
+        se mudar de ideia é só voltar aqui depois. <br>
+        Se o item estiver riscado é porque alguém já vai dar.
+      </p>
     </div>
 
     <div class="info">
       <div class="icon">
         <Icon_info />
       </div>
-      Caso prefira levar algo que não está na lista também será bem vindo!
+      <p>Caso prefira levar algo que não está na lista também será bem vindo!</p>
     </div>
     
     <ul class="cozinha">
@@ -61,4 +63,25 @@
   </section>
 
 <style>
+  section{
+    position: fixed;
+    top: 0;
+    background: url('../images/bg_wood_blue.png');
+    background-size: 100%;
+    height: 100vh;
+    padding: 1rem;
+    overflow: auto;
+  }
+  .info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  ul{
+    list-style-type: none;
+    padding: 0;
+  }
+
 </style>
