@@ -82,6 +82,25 @@
   ul{
     list-style-type: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  ul h1{
+    width: 100%;
+  }
+  ul li{
+    width: 45%;
+    padding: 0.5rem;
+  }
+  label{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
   }
 
 </style>
