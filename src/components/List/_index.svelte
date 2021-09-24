@@ -1,11 +1,20 @@
 <script>
   import Icon_info from '../../icons/Icon_info.svelte'
+  import Icon_close from '../../icons/icon_close.svelte'
+
   import { cozinha, cama, banho } from '../../stores/whishlist'
   import { open } from '../../stores/liststate'
 </script>
 
-  <section class={$open? 'list background':'list background close'}>
+<section class={$open? 'list background':'list background close'}>
+  <head>
+    <h1>Lista de presentes</h1>
+    <div class="icon" on:click={() => open.set(!open)}>
+      <Icon_close />
+    </div>
+  </head>
 
+  <div class="scroll">
     <div class="info">
       <p>Opcional <br>
         Marque uma ou mais entre as opções de presente, 
@@ -21,8 +30,8 @@
       <p>Caso prefira levar algo que não está na lista também será bem vindo!</p>
     </div>
     
+    <h1>Cozinha</h1>
     <ul class="cozinha">
-      <h1>Cozinha</h1>
       {#each cozinha as item}
         <li>
           <label>
@@ -34,8 +43,8 @@
       {/each}
     </ul>
 
+    <h1>Cama</h1>
     <ul class="cama">
-      <h1>Cama</h1>
       {#each cama as item}
         <li>
           <label>
@@ -47,8 +56,8 @@
       {/each}
     </ul>
 
+    <h1>Banho</h1>
     <ul class="banho">
-      <h1>Banho</h1>
       {#each banho as item}
         <li>
           <label>
@@ -59,18 +68,23 @@
         </li>
       {/each}
     </ul>
+  </div>
 
-  </section>
+</section>
 
 <style>
   section{
-    position: fixed;
-    top: 0;
     background: url('../images/bg_wood_blue.png');
     background-size: 100%;
+    position: fixed;
+    width: 100vw;
     height: 100vh;
-    padding: 1rem;
-    overflow: auto;
+    top: 0;
+  }
+  .scroll{
+    overflow-y: auto;
+    height: calc(100% - 60px);
+    padding: 0 1rem;
   }
   .info{
     display: flex;
@@ -82,25 +96,51 @@
   ul{
     list-style-type: none;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-areas: 'title title';
   }
-  ul h1{
+  h1{
     width: 100%;
   }
   ul li{
-    width: 45%;
-    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   label{
     background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     border-radius: 10px;
-    padding: 5px;
+    padding: 1rem;
     text-align: center;
+    height: 180px;
+    width: 120px;
+  }
+  head{
+    display: flex;
+    margin: 0;
+    background: white;
+    box-shadow: 2px 2px 6px -1px #999;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    position: relative;
+  }
+  head h1{
+    width: 100%;
+    text-align: center;
+    margin: 0;
+  }
+  .icon{
+    padding: 0 1rem;
+    cursor: pointer;
   }
 
 </style>
