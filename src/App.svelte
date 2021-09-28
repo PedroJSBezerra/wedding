@@ -40,12 +40,9 @@
 	{/if}
 </div>
 
-<style type="text/scss">
-
-	@import './styles/vars';
-
+<style>
 	.app{
-		color: $color;
+		color: #5a2626;
 	}
 	.noscroll{
 		width: 100vw;

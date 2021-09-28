@@ -21,11 +21,6 @@
     cozinha = doc.data().cozinha,
     banho = doc.data().banho
   })
-  
-
-  // docSnap.then(doc => ( 
-  // ))
-  
 </script>
 
 <section class={$open? 'list background':'list background close'}>
