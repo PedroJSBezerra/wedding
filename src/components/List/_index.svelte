@@ -4,6 +4,7 @@
 
   import { cozinha, cama, banho } from '../../stores/whishlist'
   import { open } from '../../stores/liststate'
+  
 </script>
 
 <section class={$open? 'list background':'list background close'}>

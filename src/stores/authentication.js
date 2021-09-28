@@ -1,10 +1,6 @@
-import { writable } from 'svelte/store'
-
+//app
 import {initializeApp} from 'firebase/app'
-import {getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged} from 'firebase/auth'
-
 const firebaseApp = initializeApp({
-  // Your web app's Firebase configuration
   apiKey: "AIzaSyBrfNZCYnSXsVIGrIzEq7fBypkQJOK-ADk",
   authDomain: "casamento-invitation.firebaseapp.com",
   projectId: "casamento-invitation",
@@ -13,10 +9,12 @@ const firebaseApp = initializeApp({
   appId: "1:557245127862:web:b1bc75b5400ce728c45a17"
 });
 
+//authentication
+import {getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged} from 'firebase/auth'
+import { writable } from 'svelte/store'
 const auth = getAuth(firebaseApp)
 const provider = new GoogleAuthProvider()
-
-
+export const loged = writable('loading')
 onAuthStateChanged( auth, (user) => {
   if(user){
     console.log('AuthState: Loged.')
@@ -27,7 +25,7 @@ onAuthStateChanged( auth, (user) => {
   }
 })
 
-
+//login
 export function login (){
   signInWithPopup(auth, provider)
 }
@@ -35,4 +33,11 @@ export function logout (){
   auth.signOut()
 }
 
-export const loged = writable('loading')
+//database
+import {getFirestore, collection, getDocs} from 'firebase/firestore'
+
+const db = getFirestore()
+const querySnapshot = getDocs(collection(db, "list"))
+querySnapshot.forEach((doc) => {
+  console.log(doc.data())
+})
