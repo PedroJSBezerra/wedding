@@ -1,7 +1,12 @@
 <script>
   import Icon_love_message from '../icons/icon_love_message.svelte'
   import Icon_logo from '../icons/logo.svelte'
-  import {login} from '../stores/authentication'
+  import {getAuth, signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
+
+  function login (){
+    signInWithPopup( getAuth(), new GoogleAuthProvider())
+  }
+
 </script>
 
 <div class="login bg_wood">

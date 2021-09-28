@@ -2,8 +2,29 @@
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
 
-  import { cozinha, cama, banho } from '../../stores/whishlist'
+  // import { cozinha, cama, banho } from '../../stores/whishlist'
   import { open } from '../../stores/liststate'
+
+  
+  import {doc, onSnapshot, getDoc, getFirestore} from 'firebase/firestore'
+  
+  const db = getFirestore()
+  const docRef = doc(db, 'list', 'whish')
+  const docSnap = getDoc(docRef)
+  
+  let cama = []
+  let cozinha = []
+  let banho = []
+
+  const unsub = onSnapshot(docRef, (doc) => {
+    cama = doc.data().cama, 
+    cozinha = doc.data().cozinha,
+    banho = doc.data().banho
+  })
+  
+
+  // docSnap.then(doc => ( 
+  // ))
   
 </script>
 
