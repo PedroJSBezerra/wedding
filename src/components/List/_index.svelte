@@ -3,15 +3,7 @@
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
   import {getAuth} from 'firebase/auth'
-  import {cozinha, cama, banho} from '../../lib/firebase_db'
-
-  let list = [
-    {name: "Cozinha",data:cozinha},
-    {name: "Cama",data:cama},
-    {name: "Banho", data:banho}
-  ]
-
-  console.log(list[0])
+  import {list} from '../../lib/firebase_db'
   
   //function to check check item owner
   const check_owner = (id) => {
@@ -55,58 +47,25 @@
       </div>
       <p>Caso prefira levar algo que não está na lista também será bem vindo!</p>
     </div>
-    
-    <h1>Cozinha</h1>
-    <ul class="cozinha">
-      {#each cozinha as item}
-        <li>
-          <label>
-            <img src="{item.photoUrl}" alt="">
-            <input 
-              type="checkbox" 
-              on:click={() => console.log(item.id)} 
-              disabled={check_owner(item.owner_id)}
-            >
-            {item.name}
-          </label>
-        </li>
-      {/each}
-    </ul>
 
-    <h1>Cama</h1>
-    <ul class="cama">
-      {#each cama as item}
-        <li>
-          <label>
-            <img src="{item.photoUrl}" alt="">
-            <input 
-              type="checkbox" 
-              on:click={() => console.log(item.id)} 
-              disabled={check_owner(item.owner_id)}
-            >
-            {item.name}
-          </label>
-        </li>
-      {/each}
-    </ul>
-
-    <h1>Banho</h1>
-    <ul class="banho">
-      {#each banho as item}
-        <li>
-          <label>
-            <img src="{item.photoUrl}" alt="">
-            <input 
-              type="checkbox" 
-              on:click={() => console.log(item.id)} 
-              disabled={check_owner(item.owner_id)}
-            >
-            {item.name}
-          </label>
-        </li>
-      {/each}
-    </ul>
-  </div>
+    {#each list as item}
+      <h1>{item.name}</h1>
+      <ul class="cozinha">
+        {#each item.data as item }
+          <li>
+            <label>
+              <img src="{item.photoUrl}" alt="">
+              <input 
+                type="checkbox" 
+                on:click={() => console.log(item.id)} 
+                disabled={check_owner(item.owner_id)}
+              >
+              {item.name}
+            </label>
+          </li>
+        {/each}
+      </ul>
+    {/each}
 
 </section>
 

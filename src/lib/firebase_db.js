@@ -1,10 +1,13 @@
-import {doc, docs, collection, onSnapshot, getFirestore, updateDoc} from 'firebase/firestore'
-import { init } from 'svelte/internal'
+import {collection, onSnapshot, getFirestore} from 'firebase/firestore'
+
 const db = getFirestore()
 
-export let cama = []
-export let cozinha = []
-export let banho = []
+//create array from firebase data
+export let list = [
+  {name: "Cozinha", data:[]},
+  {name: "Cama", data:[]},
+  {name: "Banho", data:[]}
+]
 
 //get realtime list from database
 function getDatabase(){
@@ -16,7 +19,7 @@ function getDatabase(){
         photoUrl: doc.data().photoUrl,
         owner_id: doc.data().owner_id,
       }
-      cama.push(item)
+      list[1].data.push(item)
     })
   })
   onSnapshot(collection(db, 'banho'), (querySnapshot) => {
@@ -27,23 +30,22 @@ function getDatabase(){
         photoUrl: doc.data().photoUrl,
         owner_id: doc.data().owner_id,
       }
-      banho.push(item)
+      list[2].data.push(item)
     })
   })
   onSnapshot(collection(db, 'cozinha'), (querySnapshot) => {
     querySnapshot.forEach(doc => {
-      
       let item = {
         id: doc.id,
         name: doc.data().name,
         photoUrl: doc.data().photoUrl,
         owner_id: doc.data().owner_id,
       }
-      cozinha.push(item)
+      list[0].data.push(item)
     })
   })
 }
-
+//initialize functions
 function initialize(){
   getDatabase()
 }
