@@ -39,7 +39,8 @@
   }
 
   //send user id to obj
-  const send_id = () => {
+  const send_id = (id) => {
+    console.log(id)
     updateDoc(docRef, {
       "cozinha.0.owner_id": user.uid
     })
@@ -73,11 +74,11 @@
     
     <h1>Cozinha</h1>
     <ul class="cozinha">
-      {#each cozinha as item}
+      {#each cozinha as item, index (item.id)}
         <li>
           <label>
             <img src="{item.photoUrl}" alt="">
-            <input type="checkbox" on:click={send_id} disabled={check_owner(item.owner_id)}>
+            <input type="checkbox" on:click={send_id(index)} disabled={check_owner(item.owner_id)}>
             {item.name}
           </label>
         </li>
