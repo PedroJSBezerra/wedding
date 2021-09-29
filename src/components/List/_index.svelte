@@ -2,7 +2,7 @@
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
 
-  // import { cozinha, cama, banho } from '../../stores/whishlist'
+  import  '../../stores/whishlist'
   import { open } from '../../stores/liststate'
 
   

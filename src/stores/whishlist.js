@@ -1,3 +1,7 @@
+import {doc, onSnapshot, getDoc, getFirestore} from 'firebase/firestore'
+
+const db = getFirestore()
+
 export let cozinha = [
   {
     name: 'Garrafa de café (rosa)',
@@ -109,3 +113,10 @@ export let banho = [
     checked: false
   }
 ]
+
+setDataToFirebase()
+function setDataToFirebase(){
+  let cozinhaRef = doc(db, 'list', 'cozinha')
+
+  setDoc(cozinhaRef, {cozinha})
+}
