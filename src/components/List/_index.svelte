@@ -1,26 +1,56 @@
 <script>
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
+  import { open } from '../../stores/functions'
+  
+  import {getAuth} from 'firebase/auth'
+  import {doc, onSnapshot, getFirestore, updateDoc} from 'firebase/firestore'
 
+<<<<<<< HEAD
   import  '../../stores/whishlist'
   import { open } from '../../stores/liststate'
+=======
+  import '../../stores/whishlist'
+>>>>>>> 852cacce369ab0303e000acf2481872f6ec76cd4
 
-  
-  import {doc, onSnapshot, getDoc, getFirestore} from 'firebase/firestore'
-  
+  //get list from database
   const db = getFirestore()
   const docRef = doc(db, 'list', 'whish')
-  const docSnap = getDoc(docRef)
-  
   let cama = []
   let cozinha = []
   let banho = []
-
   const unsub = onSnapshot(docRef, (doc) => {
-    cama = doc.data().cama, 
-    cozinha = doc.data().cozinha,
-    banho = doc.data().banho
+    cama = Object.values(doc.data().cama), 
+    cozinha = Object.values(doc.data().cozinha),
+    banho = Object.values(doc.data().banho)
   })
+
+
+  //function to check check item owner
+  const auth = getAuth()
+  const user = auth.currentUser
+  const check_owner = (id) => {
+    
+    let disabled
+    // compare current uid to item uid
+    if(id == user.uid || id == ''){
+      disabled = false
+    }else{
+      disabled = true
+    }
+    //return true to enable item
+    //return false to disable item
+    return disabled 
+  }
+
+  //send user id to obj
+  const send_id = (id) => {
+    console.log(id)
+    updateDoc(docRef, {
+      "cozinha.0.owner_id": user.uid
+    })
+  }
+
 </script>
 
 <section class={$open? 'list background':'list background close'}>
@@ -49,11 +79,11 @@
     
     <h1>Cozinha</h1>
     <ul class="cozinha">
-      {#each cozinha as item}
+      {#each cozinha as item, index (item.id)}
         <li>
           <label>
             <img src="{item.photoUrl}" alt="">
-            <input type="checkbox" name="" id="">
+            <input type="checkbox" on:click={send_id(index)} disabled={check_owner(item.owner_id)}>
             {item.name}
           </label>
         </li>

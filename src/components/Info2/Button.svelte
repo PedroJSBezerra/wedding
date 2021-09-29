@@ -1,6 +1,6 @@
 <script>
   import Icon_gift_box from '../../icons/icon_gift_box.svelte'
-  import {open} from '../../stores/liststate'
+  import {open} from '../../stores/functions'
 
   const handleclick = () => {
     open.set(true)
