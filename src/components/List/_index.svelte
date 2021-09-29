@@ -4,11 +4,19 @@
   import { open } from '../../stores/functions'
   import {getAuth} from 'firebase/auth'
   import {cozinha, cama, banho} from '../../lib/firebase_db'
+
+  let list = [
+    {name: "Cozinha",data:cozinha},
+    {name: "Cama",data:cama},
+    {name: "Banho", data:banho}
+  ]
+
+  console.log(list[0])
   
   //function to check check item owner
-  const auth = getAuth()
-  const user = auth.currentUser
   const check_owner = (id) => {
+    const auth = getAuth()
+    const user = auth.currentUser
     
     let disabled
     // compare current uid to item uid
@@ -54,7 +62,11 @@
         <li>
           <label>
             <img src="{item.photoUrl}" alt="">
-            <input type="checkbox" disabled={check_owner(item.owner_id)}>
+            <input 
+              type="checkbox" 
+              on:click={() => console.log(item.id)} 
+              disabled={check_owner(item.owner_id)}
+            >
             {item.name}
           </label>
         </li>
@@ -67,7 +79,11 @@
         <li>
           <label>
             <img src="{item.photoUrl}" alt="">
-            <input type="checkbox" name="" id="">
+            <input 
+              type="checkbox" 
+              on:click={() => console.log(item.id)} 
+              disabled={check_owner(item.owner_id)}
+            >
             {item.name}
           </label>
         </li>
@@ -80,7 +96,11 @@
         <li>
           <label>
             <img src="{item.photoUrl}" alt="">
-            <input type="checkbox" name="" id="">
+            <input 
+              type="checkbox" 
+              on:click={() => console.log(item.id)} 
+              disabled={check_owner(item.owner_id)}
+            >
             {item.name}
           </label>
         </li>
