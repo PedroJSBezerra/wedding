@@ -2,30 +2,9 @@
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
-  
   import {getAuth} from 'firebase/auth'
-  import {doc, onSnapshot, getFirestore, updateDoc} from 'firebase/firestore'
-
-<<<<<<< HEAD
-  import  '../../stores/whishlist'
-  import { open } from '../../stores/liststate'
-=======
-  import '../../stores/whishlist'
->>>>>>> 852cacce369ab0303e000acf2481872f6ec76cd4
-
-  //get list from database
-  const db = getFirestore()
-  const docRef = doc(db, 'list', 'whish')
-  let cama = []
-  let cozinha = []
-  let banho = []
-  const unsub = onSnapshot(docRef, (doc) => {
-    cama = Object.values(doc.data().cama), 
-    cozinha = Object.values(doc.data().cozinha),
-    banho = Object.values(doc.data().banho)
-  })
-
-
+  import {cozinha, cama, banho} from '../../lib/firebase_db'
+  
   //function to check check item owner
   const auth = getAuth()
   const user = auth.currentUser
@@ -41,14 +20,6 @@
     //return true to enable item
     //return false to disable item
     return disabled 
-  }
-
-  //send user id to obj
-  const send_id = (id) => {
-    console.log(id)
-    updateDoc(docRef, {
-      "cozinha.0.owner_id": user.uid
-    })
   }
 
 </script>
@@ -79,11 +50,11 @@
     
     <h1>Cozinha</h1>
     <ul class="cozinha">
-      {#each cozinha as item, index (item.id)}
+      {#each cozinha as item}
         <li>
           <label>
             <img src="{item.photoUrl}" alt="">
-            <input type="checkbox" on:click={send_id(index)} disabled={check_owner(item.owner_id)}>
+            <input type="checkbox" disabled={check_owner(item.owner_id)}>
             {item.name}
           </label>
         </li>
