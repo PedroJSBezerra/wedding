@@ -57,11 +57,18 @@ const getDatabase = () => {
 //set item owner
 export const setOwner = (item) => {
   const db = getFirestore()
-  let user = getAuth().currentUser.uid
+  let user 
+
+  if(item.owner_id === 'no id'){
+    console.log('op1')
+    user = getAuth().currentUser.uid
+  }else if(item.owner_id === getAuth().currentUser.uid){
+    console.log('op2')
+    user = 'no id'
+  }
+
   let itemRef = doc(db, item.collection, item.id)
-  
   updateDoc(itemRef, {owner_id: user})
-  //
   .then(() => {
       console.log("Document successfully updated!");
   })
@@ -72,11 +79,12 @@ export const setOwner = (item) => {
 }
 //function to check check item owner
 export const check_owner = (item) => {
+  console.log(item.owner_id)
   let user = getAuth().currentUser.uid
   let id = item.owner_id
   let disabled
   // compare current uid to item uid
-  if(id == user || id == ''){
+  if(id == user || id == 'no id'){
     disabled = false
   }else{
     disabled = true
@@ -84,11 +92,6 @@ export const check_owner = (item) => {
   //return true to enable item
   //return false to disable item
   return disabled 
-}
-//click on checkbox
-export const handleClick = (item) => {
-  let user = getAuth().currentUser.uid
-  setOwner(item, user)
 }
 //checbox handler
 export const handleChecked = (item) => {

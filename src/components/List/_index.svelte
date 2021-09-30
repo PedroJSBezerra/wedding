@@ -2,7 +2,7 @@
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
-  import {list, setOwner, check_owner, handleClick, handleChecked} from '../../lib/firebase_db'
+  import {list, setOwner, check_owner, handleChecked} from '../../lib/firebase_db'
 
 </script>
 
@@ -41,7 +41,7 @@
                 type="checkbox" 
                 disabled={check_owner(item)}
                 checked={handleChecked(item)}
-                on:click={() => handleClick(item)}
+                on:click={() => setOwner(item)}
               >
               {item.name}
             </label>
