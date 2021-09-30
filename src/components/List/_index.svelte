@@ -3,7 +3,7 @@
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
   import {getAuth} from 'firebase/auth'
-  import {list} from '../../lib/firebase_db'
+  import {list, setOwner} from '../../lib/firebase_db'
   
   //function to check check item owner
   const check_owner = (id) => {
@@ -20,6 +20,11 @@
     //return true to enable item
     //return false to disable item
     return disabled 
+  }
+  //click on checkbox
+  const handleClick = (item) => {
+    let user = getAuth().currentUser.uid
+    setOwner(item, user)
   }
 
 </script>
@@ -57,8 +62,8 @@
               <img src="{item.photoUrl}" alt="">
               <input 
                 type="checkbox" 
-                on:click={() => console.log(item.id)} 
                 disabled={check_owner(item.owner_id)}
+                on:click={() => handleClick(item)}
               >
               {item.name}
             </label>
