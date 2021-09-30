@@ -1,12 +1,11 @@
 import {
+  doc,
   collection, 
+  updateDoc,
   onSnapshot, 
   getFirestore,
-  doc,
-  updateDoc,
 } from 'firebase/firestore'
-
-const db = getFirestore()
+import {getAuth} from 'firebase/auth'
 
 //create array from firebase data
 export let list = [
@@ -15,7 +14,9 @@ export let list = [
   {name: "Banho", data:[]}
 ]
 //get realtime list from database
-function getDatabase(){
+const getDatabase = () => {
+  const db = getFirestore()
+
   onSnapshot(collection(db, 'cama'), (querySnapshot) => {
     querySnapshot.forEach(doc => {
       let item = {
@@ -54,14 +55,13 @@ function getDatabase(){
   })
 }
 //set item owner
-export function setOwner(item, user){
-  console.log(item.id)
-  console.log(item.collection)
-  console.log(item.owner_id)
-  console.log(user)
-
+export const setOwner = (item) => {
+  const db = getFirestore()
+  let user = getAuth().currentUser.uid
   let itemRef = doc(db, item.collection, item.id)
+  
   updateDoc(itemRef, {owner_id: user})
+  //
   .then(() => {
       console.log("Document successfully updated!");
   })
@@ -70,6 +70,34 @@ export function setOwner(item, user){
       console.error("Error updating document: ", error);
   })
 }
+//function to check check item owner
+export const check_owner = (item) => {
+  let user = getAuth().currentUser.uid
+  let id = item.owner_id
+  let disabled
+  // compare current uid to item uid
+  if(id == user || id == ''){
+    disabled = false
+  }else{
+    disabled = true
+  }
+  //return true to enable item
+  //return false to disable item
+  return disabled 
+}
+//click on checkbox
+export const handleClick = (item) => {
+  let user = getAuth().currentUser.uid
+  setOwner(item, user)
+}
+//checbox handler
+export const handleChecked = (item) => {
+  let response = item.owner_id == getAuth().currentUser.uid
+  return response
+}
+
+
+
 
 //initialize functions
 function initialize(){

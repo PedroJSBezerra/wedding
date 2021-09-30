@@ -2,30 +2,7 @@
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
-  import {getAuth} from 'firebase/auth'
-  import {list, setOwner} from '../../lib/firebase_db'
-  
-  //function to check check item owner
-  const check_owner = (id) => {
-    const auth = getAuth()
-    const user = auth.currentUser
-    
-    let disabled
-    // compare current uid to item uid
-    if(id == user.uid || id == ''){
-      disabled = false
-    }else{
-      disabled = true
-    }
-    //return true to enable item
-    //return false to disable item
-    return disabled 
-  }
-  //click on checkbox
-  const handleClick = (item) => {
-    let user = getAuth().currentUser.uid
-    setOwner(item, user)
-  }
+  import {list, setOwner, check_owner, handleClick, handleChecked} from '../../lib/firebase_db'
 
 </script>
 
@@ -62,7 +39,8 @@
               <img src="{item.photoUrl}" alt="">
               <input 
                 type="checkbox" 
-                disabled={check_owner(item.owner_id)}
+                disabled={check_owner(item)}
+                checked={handleChecked(item)}
                 on:click={() => handleClick(item)}
               >
               {item.name}
