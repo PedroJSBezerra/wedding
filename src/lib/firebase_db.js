@@ -16,56 +16,29 @@ export let list = [
 //get realtime list from database
 const getDatabase = () => {
   const db = getFirestore()
-
-  onSnapshot(collection(db, 'cama'), (querySnapshot) => {
-    querySnapshot.forEach(doc => {
-      let item = {
-        id: doc.id,
-        collection: 'cama',
-        name: doc.data().name,
-        photoUrl: doc.data().photoUrl,
-        owner_id: doc.data().owner_id,
-      }
-      list[1].data.push(item)
+  let collections = ["cozinha","cama","banho",]
+  function getData(element, index, array) {
+    onSnapshot(collection(db, element), (querySnapshot) => {
+      querySnapshot.forEach(doc => {
+        let item = {
+          id: doc.id,
+          collection: 'cama',
+          name: doc.data().name,
+          photoUrl: doc.data().photoUrl,
+          owner_id: doc.data().owner_id,
+        }
+        list[index].data.push(item)
+      })
     })
-  })
-  onSnapshot(collection(db, 'banho'), (querySnapshot) => {
-    querySnapshot.forEach(doc => {
-      let item = {
-        id: doc.id,
-        collection: 'banho',
-        name: doc.data().name,
-        photoUrl: doc.data().photoUrl,
-        owner_id: doc.data().owner_id,
-      }
-      list[2].data.push(item)
-    })
-  })
-  onSnapshot(collection(db, 'cozinha'), (querySnapshot) => {
-    querySnapshot.forEach(doc => {
-      let item = {
-        id: doc.id,
-        collection: 'cozinha',
-        name: doc.data().name,
-        photoUrl: doc.data().photoUrl,
-        owner_id: doc.data().owner_id,
-      }
-      list[0].data.push(item)
-    })
-  })
+  }
+  collections.forEach(getData)
 }
 //set item owner
 export const setOwner = (item) => {
+  console.table(item)
+  
   const db = getFirestore()
-  let user 
-
-  if(item.owner_id === 'no id'){
-    console.log('op1')
-    user = getAuth().currentUser.uid
-  }else if(item.owner_id === getAuth().currentUser.uid){
-    console.log('op2')
-    user = 'no id'
-  }
+  let user = getAuth().currentUser.uid
 
   let itemRef = doc(db, item.collection, item.id)
   updateDoc(itemRef, {owner_id: user})
@@ -79,12 +52,11 @@ export const setOwner = (item) => {
 }
 //function to check check item owner
 export const check_owner = (item) => {
-  console.log(item.owner_id)
   let user = getAuth().currentUser.uid
   let id = item.owner_id
   let disabled
   // compare current uid to item uid
-  if(id == user || id == 'no id'){
+  if(id == user || id == ''){
     disabled = false
   }else{
     disabled = true
@@ -98,10 +70,6 @@ export const handleChecked = (item) => {
   let response = item.owner_id == getAuth().currentUser.uid
   return response
 }
-
-
-
-
 //initialize functions
 function initialize(){
   getDatabase()

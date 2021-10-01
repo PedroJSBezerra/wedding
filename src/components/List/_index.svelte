@@ -41,7 +41,7 @@
                 type="checkbox" 
                 disabled={check_owner(item)}
                 checked={handleChecked(item)}
-                on:click={() => setOwner(item)}
+                on:click={() => {setOwner(item)}}
               >
               {item.name}
             </label>
