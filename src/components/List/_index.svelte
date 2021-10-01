@@ -2,8 +2,20 @@
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
-  import {list, setOwner, check_owner, handleChecked} from '../../lib/firebase_db'
+  import {collection, onSnapshot, getFirestore} from 'firebase/firestore'
+  
+  let cozinha = []
 
+  let db = getFirestore()
+  const collection
+  const unsub = onSnapshot(collection(db, 'cozinha'), (querySnapshot) => {
+    let data = []
+    querySnapshot.forEach((doc) => {
+      cozinha.push(doc.data())
+    })
+    console.log(data)
+    cozinha = data
+  })
 </script>
 
 <section class={$open? 'list background':'list background close'}>
@@ -30,25 +42,22 @@
       <p>Caso prefira levar algo que não está na lista também será bem vindo!</p>
     </div>
 
-    {#each list as item}
-      <h1>{item.name}</h1>
+      <h1>Cozinha</h1>
       <ul class="cozinha">
-        {#each item.data as item }
+        {#each cozinha as item }
           <li>
             <label>
               <img src="{item.photoUrl}" alt="">
               <input 
                 type="checkbox" 
-                disabled={check_owner(item)}
-                checked={handleChecked(item)}
-                on:click={() => {setOwner(item)}}
+                disabled={false}
+                checked={() => console.log('checked!')}  
               >
               {item.name}
             </label>
           </li>
         {/each}
       </ul>
-    {/each}
 
 </section>
 
