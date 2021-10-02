@@ -33,10 +33,19 @@
   //set item owner
   export const setOwner = (item, index, name) => {
     const db = getFirestore()
+    let uid = getAuth().currentUser.uid
+    let toggle
+    
+    if(item.owner_id === uid){
+      toggle = ''
+    }else{
+      toggle = uid
+    }
+    console.log(item.owner_id+"\n"+uid)
 
     let itemRef = doc(db, 'list', name)
     
-    updateDoc(itemRef, {[`${index}.owner_id`]: getAuth().currentUser.uid})
+    updateDoc(itemRef, {[`${index}.owner_id`]: toggle})
 
     .then(() => {
         console.log("Document successfully updated!");
@@ -66,7 +75,7 @@
     let response = item.owner_id == getAuth().currentUser.uid
     return response
   }
-  
+
 </script>
 
 <section class={$open? 'list background':'list background close'}>
