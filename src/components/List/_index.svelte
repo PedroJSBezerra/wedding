@@ -66,11 +66,7 @@
     let response = item.owner_id == getAuth().currentUser.uid
     return response
   }
-
-
-
-
-
+  
 </script>
 
 <section class={$open? 'list background':'list background close'}>
