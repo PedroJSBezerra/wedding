@@ -7,32 +7,24 @@ import {
 } from 'firebase/firestore'
 import {getAuth} from 'firebase/auth'
 
-//create array from firebase data
-export let list = [
-  {name: "Cozinha", data:[]},
-  {name: "Cama", data:[]},
-  {name: "Banho", data:[]}
-]
+//create arrays from firebase data
+export let cozinha = []
+export let cama = []
+export let banho = []
 //get realtime list from database
-const getDatabase = () => {
-  const db = getFirestore()
-  let collections = ["cozinha","cama","banho",]
-  function getData(element, index, array) {
-    onSnapshot(collection(db, element), (querySnapshot) => {
-      querySnapshot.forEach(doc => {
-        let item = {
-          id: doc.id,
-          collection: 'cama',
-          name: doc.data().name,
-          photoUrl: doc.data().photoUrl,
-          owner_id: doc.data().owner_id,
-        }
-        list[index].data.push(item)
-      })
-    })
-  }
-  collections.forEach(getData)
-}
+const db = getFirestore()
+
+onSnapshot(doc(db, "list", "Cozinha"), (doc) => {
+  cozinha = doc.data().data
+  console.log("Current data: ", doc.data());
+})
+onSnapshot(doc(db, "list", "Cama"), (doc) => {
+  cama = doc.data().data
+})
+onSnapshot(doc(db, "list", "Banho"), (doc) => {
+  banho = doc.data().data
+})
+
 //set item owner
 export const setOwner = (item) => {
   console.table(item)
@@ -70,8 +62,3 @@ export const handleChecked = (item) => {
   let response = item.owner_id == getAuth().currentUser.uid
   return response
 }
-//initialize functions
-function initialize(){
-  getDatabase()
-}
-initialize()
