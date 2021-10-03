@@ -6,7 +6,7 @@
   const db = getFirestore()
   let presence = 'yes'
   let quantity = '0'
-  let name = user.displayName
+  let name = ''
   
   let cozinha = []
   let cama = []
@@ -43,7 +43,8 @@
   const handleSubmit = (e) => {
     let data = {
       uid: user.uid,
-      name: user.displayName,
+      name: name,
+      displayName: user.displayName,
       photo: user.photoURL,
       phone: user.phoneNumber,
       email: user.email,
@@ -75,6 +76,11 @@
       <label for="1">1 pessoa</label>
       <input type="radio" name="quantity" bind:group={quantity} id="2" value="2">
       <label for="2">2 pessoas ou mais</label>
+    </div>
+
+    <div>
+      <h3>Você ecolheu {[...cama,...cozinha,...banho].length} 
+        presente{[...cozinha, ...cama, ...banho].length == 1 ? '':"s"}</h3>
     </div>
 
     <div class="name">
@@ -134,16 +140,13 @@
     border: 1px solid;
     margin: 6px;
   }
-  .name{
-    margin-top: 3rem;
-  }
   input[type=text]{
     width: 100%;
     text-align: center;
     border-radius: 5px;
   }
   input[type=submit]{
-    margin-top: 5rem;
+    margin-top: 2rem;
     border-radius: 5px;
     cursor: pointer;
   }
