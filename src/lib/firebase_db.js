@@ -6,34 +6,50 @@ import {
   getFirestore,
 } from 'firebase/firestore'
 import {getAuth} from 'firebase/auth'
-
+import { get, writable } from 'svelte/store'
 //create arrays from firebase data
-export let cozinha = []
-export let cama = []
-export let banho = []
+export const db = getFirestore()
+export const user = getAuth().currentUser
+
+export const cozinha = writable([])
+export let cama = writable([])
+export let banho = writable([])
+
+export const list = writable([])
+
+onSnapshot(collection(db, "list"), (doc) => {
+  let docs = []
+  doc.forEach(doc => docs.push(Object.values(doc.data())))
+  list.set(docs)
+})
 //get realtime list from database
-const db = getFirestore()
-
-onSnapshot(doc(db, "list", "Cozinha"), (doc) => {
-  cozinha = doc.data().data
-  console.log("Current data: ", doc.data());
-})
-onSnapshot(doc(db, "list", "Cama"), (doc) => {
-  cama = doc.data().data
-})
-onSnapshot(doc(db, "list", "Banho"), (doc) => {
-  banho = doc.data().data
-})
-
+function getDatabase(){
+  onSnapshot(doc(db, "list", "Cozinha"), (doc) => {
+    cozinha.set(Object.values(doc.data()))
+  })
+  onSnapshot(doc(db, "list", "Cama"), (doc) => {
+    cama.set(Object.values(doc.data()))
+  })
+  onSnapshot(doc(db, "list", "Banho"), (doc) => {
+    banho.set(Object.values(doc.data()))
+  })
+}
+getDatabase()
 //set item owner
-export const setOwner = (item) => {
-  console.table(item)
-  
+export const setOwner = (item, index, name) => {
   const db = getFirestore()
-  let user = getAuth().currentUser.uid
+  let uid = getAuth().currentUser.uid
+  let toggle
+  
+  if(item.owner_id === uid){
+    toggle = ''
+  }else{
+    toggle = uid
+  }
 
-  let itemRef = doc(db, item.collection, item.id)
-  updateDoc(itemRef, {owner_id: user})
+  let itemRef = doc(db, 'list', name)
+  
+  updateDoc(itemRef, {[`${index}.owner_id`]: toggle})
   .then(() => {
       console.log("Document successfully updated!");
   })
@@ -61,4 +77,18 @@ export const check_owner = (item) => {
 export const handleChecked = (item) => {
   let response = item.owner_id == getAuth().currentUser.uid
   return response
+}
+//form submit
+export const handleSubmit = (e) => {
+  let data = {
+    uid: user.uid,
+    displayName: user.displayName,
+    photo: user.photoURL,
+    phone: user.phoneNumber,
+    email: user.email,
+    presence: presence,
+    quantity: quantity,
+    list:[...$cama,...$cozinha,...$banho]
+  }
+  setDoc(doc(db, "users", user.uid), data)
 }

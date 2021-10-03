@@ -4,78 +4,9 @@
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
   import { fly, fade } from 'svelte/transition'
-  // import {list, setOwner, check_owner, handleChecked} from '../../lib/firebase_db'
+  import { cozinha, cama, banho, setOwner, check_owner, handleChecked } from '../../lib/firebase_db'
   // import '../../lib/listToFirebase'
-  import {
-    doc,
-    collection, 
-    updateDoc,
-    onSnapshot, 
-    getFirestore,
-  } from 'firebase/firestore'
-  import {getAuth} from 'firebase/auth'
-
-  //create arrays from firebase data
-  let cozinha = []
-  let cama = []
-  let banho = []
-  //get realtime list from database
-  const db = getFirestore()
-
-  onSnapshot(doc(db, "list", "Cozinha"), (doc) => {
-    cozinha = Object.values(doc.data())
-  })
-  onSnapshot(doc(db, "list", "Cama"), (doc) => {
-    cama = Object.values(doc.data())
-  })
-  onSnapshot(doc(db, "list", "Banho"), (doc) => {
-    banho = Object.values(doc.data())
-  })
-
-  //set item owner
-  export const setOwner = (item, index, name) => {
-    const db = getFirestore()
-    let uid = getAuth().currentUser.uid
-    let toggle
-    
-    if(item.owner_id === uid){
-      toggle = ''
-    }else{
-      toggle = uid
-    }
-
-    let itemRef = doc(db, 'list', name)
-    
-    updateDoc(itemRef, {[`${index}.owner_id`]: toggle})
-    .then(() => {
-        console.log("Document successfully updated!");
-    })
-    .catch((error) => {
-        // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
-    })
-  }
-  //function to check check item owner
-  export const check_owner = (item) => {
-    let user = getAuth().currentUser.uid
-    let id = item.owner_id
-    let disabled
-    // compare current uid to item uid
-    if(id == user || id == ''){
-      disabled = false
-    }else{
-      disabled = true
-    }
-    //return true to enable item
-    //return false to disable item
-    return disabled 
-  }
-  //checbox handler
-  export const handleChecked = (item) => {
-    let response = item.owner_id == getAuth().currentUser.uid
-    return response
-  }
-
+ 
 </script>
 
 <section in:fly={{x: 300}} out:fly={{x:300}} class={$open? 'list':'list close'}>
@@ -107,7 +38,7 @@
 
     <h1>Cozinha</h1>
     <ul class="cozinha">
-      {#each cozinha as item, index }
+      {#each $cozinha as item, index }
         <li in:fly={{ y: 200 }}>
           <input 
             id={item.name}
@@ -125,7 +56,7 @@
     </ul>
     <h1>Cama</h1>
     <ul class="cama">
-      {#each cama as item, index }
+      {#each $cama as item, index }
       <li>
           <input 
             id={item.name}
@@ -143,7 +74,7 @@
     </ul>
     <h1>Banho</h1>
     <ul class="banho">
-      {#each banho as item, index }
+      {#each $banho as item, index }
         <li>
           <input
             id={item.name} 

@@ -1,59 +1,13 @@
 <script>
   import {getAuth} from 'firebase/auth'
   import {getFirestore, doc, setDoc, onSnapshot} from 'firebase/firestore'
+  import {cozinha, cama, banho, handleSubmit} from '../../lib/firebase_db'
 
-  const user = getAuth().currentUser
-  const db = getFirestore()
   let presence = 'yes'
   let quantity = '0'
   let name = ''
-  
-  let cozinha = []
-  let cama = []
-  let banho = []
 
-  onSnapshot(doc(db, "list", "Cozinha"), (doc) => {
-    let lst = []
-    Object.values(doc.data()).forEach((item, index, array) => {
-      if(item.owner_id === user.uid){
-        lst.push(item)
-      }
-    })
-    cozinha = lst
-  })
-  onSnapshot(doc(db, "list", "Cama"), (doc) => {
-    let lst = []
-    Object.values(doc.data()).forEach((item, index, array) => {
-      if(item.owner_id === user.uid){
-        lst.push(item)
-      }
-    })
-    cama = lst
-  })
-  onSnapshot(doc(db, "list", "Banho"), (doc) => {
-    let lst = []
-    Object.values(doc.data()).forEach((item, index, array) => {
-      if(item.owner_id === user.uid){
-        lst.push(item)
-      }
-    })
-    banho = lst
-  })
 
-  const handleSubmit = (e) => {
-    let data = {
-      uid: user.uid,
-      name: name,
-      displayName: user.displayName,
-      photo: user.photoURL,
-      phone: user.phoneNumber,
-      email: user.email,
-      presence: presence,
-      quantity: quantity,
-      list:[...cama,...cozinha,...banho]
-    }
-    setDoc(doc(db, "users", user.uid), data)
-  }
 
 </script>
 
@@ -79,8 +33,8 @@
     </div>
 
     <div>
-      <h3>Você ecolheu {[...cama,...cozinha,...banho].length} 
-        presente{[...cozinha, ...cama, ...banho].length == 1 ? '':"s"}</h3>
+      <h3>Você ecolheu {[...$cama,...$cozinha,...$banho].length} 
+        presente{[...$cozinha, ...$cama, ...$banho].length == 1 ? '':"s"}</h3>
     </div>
 
     <div class="name">
