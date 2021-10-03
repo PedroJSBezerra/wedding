@@ -1,13 +1,57 @@
 <script>
+  import {getAuth} from 'firebase/auth'
+  import {getFirestore, doc, setDoc, onSnapshot} from 'firebase/firestore'
 
+  const user = getAuth().currentUser
+  const db = getFirestore()
   let presence = 'yes'
   let quantity = '0'
-  let name = ''
+  let name = user.displayName
+  
+  let cozinha = []
+  let cama = []
+  let banho = []
+
+  onSnapshot(doc(db, "list", "Cozinha"), (doc) => {
+    let lst = []
+    Object.values(doc.data()).forEach((item, index, array) => {
+      if(item.owner_id === user.uid){
+        lst.push(item)
+      }
+    })
+    cozinha = lst
+  })
+  onSnapshot(doc(db, "list", "Cama"), (doc) => {
+    let lst = []
+    Object.values(doc.data()).forEach((item, index, array) => {
+      if(item.owner_id === user.uid){
+        lst.push(item)
+      }
+    })
+    cama = lst
+  })
+  onSnapshot(doc(db, "list", "Banho"), (doc) => {
+    let lst = []
+    Object.values(doc.data()).forEach((item, index, array) => {
+      if(item.owner_id === user.uid){
+        lst.push(item)
+      }
+    })
+    banho = lst
+  })
 
   const handleSubmit = (e) => {
-    console.log(presence)
-    console.log(quantity)
-    console.log(name)
+    let data = {
+      uid: user.uid,
+      name: user.displayName,
+      photo: user.photoURL,
+      phone: user.phoneNumber,
+      email: user.email,
+      presence: presence,
+      quantity: quantity,
+      list:[...cama,...cozinha,...banho]
+    }
+    setDoc(doc(db, "users", user.uid), data)
   }
 
 </script>

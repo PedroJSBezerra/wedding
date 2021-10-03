@@ -3,6 +3,7 @@
   import Icon_info from '../../icons/Icon_info.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../stores/functions'
+  import { fly, fade } from 'svelte/transition'
   // import {list, setOwner, check_owner, handleChecked} from '../../lib/firebase_db'
   // import '../../lib/listToFirebase'
   import {
@@ -77,7 +78,7 @@
 
 </script>
 
-<section class={$open? 'list':'list close'}>
+<section in:fly={{x: 300}} out:fly={{x:300}} class={$open? 'list':'list close'}>
   <head>
     
     <Cart/>
@@ -107,7 +108,7 @@
     <h1>Cozinha</h1>
     <ul class="cozinha">
       {#each cozinha as item, index }
-        <li>
+        <li in:fly={{ y: 200 }}>
           <input 
             id={item.name}
             type="checkbox" 
@@ -207,7 +208,7 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    top: 50%;
+    top: 56%;
   }
   input[type=checkbox]:checked + label{
     border: 2px solid green;
@@ -239,6 +240,7 @@
     width: 100%;
     height: 60px;
     position: relative;
+    z-index: 1;
   }
   .icon{
     padding: 0 1rem;

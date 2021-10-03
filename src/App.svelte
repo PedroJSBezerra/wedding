@@ -6,28 +6,15 @@
 	import {loged} from './stores/functions'
 	
 	import {getAuth, onAuthStateChanged} from 'firebase/auth'
-	import {doc, setDoc, getFirestore} from 'firebase/firestore'
 
 	//login observer function
 	onAuthStateChanged( getAuth(), (user) => {
 		if(user){
 			console.log('AuthState: Loged.')
 			loged.set(true)
-
-			const db = getFirestore()
-			let data = {
-				uid: user.uid,
-				name: user.displayName,
-				photo: user.photoURL,
-				phone: user.phoneNumber,
-				email: user.email,
-				list:{}
-			}
-			setDoc(doc(db, "users", user.uid), data)
-
 		}else{
-			loged.set(false)
 			console.log('AuthState: not loged.')
+			loged.set(false)
 		}
 	})
 
