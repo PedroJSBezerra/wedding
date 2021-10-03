@@ -1,95 +1,32 @@
 <script>
   import Cart from './Cart.svelte'
-  import Icon_info from '../../icons/Icon_info.svelte'
+  import Info from './Info.svelte'
+  import Card from './Card.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
-  import { open } from '../../stores/functions'
+  import { open } from '../../lib/firebase'
   import { fly, fade } from 'svelte/transition'
-  import { cozinha, cama, banho, setOwner, check_owner, handleChecked } from '../../lib/firebase_db'
-  // import '../../lib/listToFirebase'
+  import { list, setOwner, check_owner, handleChecked } from '../../lib/firebase'
  
 </script>
 
 <section in:fly={{x: 300}} out:fly={{x:300}} class={$open? 'list':'list close'}>
   <head>
-    
     <Cart/>
     <div class="icon" on:click={() => open.set(!open)}>
       <Icon_close />
     </div>
   </head>
 
-
   <div class="scroll background">
-    
-    <div class="info">
-      <p>Opcional <br>
-        Marque uma ou mais entre as opções de presente, 
-        se mudar de ideia é só voltar aqui depois. <br>
-        Se o item estiver riscado é porque alguém já vai dar.
-      </p>
-    </div>
-
-    <div class="info">
-      <div class="icon">
-        <Icon_info />
-      </div>
-      <p>Caso prefira levar algo que não está na lista também será bem vindo!</p>
-    </div>
-
-    <h1>Cozinha</h1>
-    <ul class="cozinha">
-      {#each $cozinha as item, index }
-        <li in:fly={{ y: 200 }}>
-          <input 
-            id={item.name}
-            type="checkbox" 
-            disabled={check_owner(item)}
-            checked={handleChecked(item)}
-            on:click={() => {setOwner(item, index, "Cozinha")}}
-          >
-          <label for={item.name}>
-            <img src="{item.photoUrl}" alt="">
-            {item.name}
-          </label>
-        </li>
-      {/each}
-    </ul>
-    <h1>Cama</h1>
-    <ul class="cama">
-      {#each $cama as item, index }
-      <li>
-          <input 
-            id={item.name}
-            type="checkbox" 
-            disabled={check_owner(item)}
-            checked={handleChecked(item)}
-            on:click={() => {setOwner(item, index, "Cama")}}
-          >
-          <label for={item.name}>
-            <img src="{item.photoUrl}" alt="">
-            {item.name}
-          </label>
-        </li>
-      {/each}
-    </ul>
-    <h1>Banho</h1>
-    <ul class="banho">
-      {#each $banho as item, index }
-        <li>
-          <input
-            id={item.name} 
-            type="checkbox" 
-            disabled={check_owner(item)}
-            checked={handleChecked(item)}
-            on:click={() => {setOwner(item, index, "Banho")}}
-          >
-          <label for={item.name}>
-            <img src="{item.photoUrl}" alt="">
-            {item.name}
-          </label>
-        </li>
-      {/each}
-    </ul>
+    <Info />
+    {#each $list as section}
+      <h1>{section.id}</h1>
+      <ul class="cozinha">
+        {#each section.data as item, index }
+          <Card section={section} item={item} index={index}/>
+        {/each}
+      </ul>
+    {/each}
 </section>
 
 <style>
@@ -108,13 +45,6 @@
     height: calc(100% - 60px);
     padding: 0 1rem;
   }
-  .info{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-  }
   ul{
     list-style-type: none;
     padding: 0;
@@ -127,40 +57,6 @@
   }
   h1{
     width: 100%;
-  }
-  ul li{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  input[type=checkbox]{
-    /* display: none; */
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 56%;
-  }
-  input[type=checkbox]:checked + label{
-    border: 2px solid green;
-  }
-  input[type=checkbox]:disabled + label{
-    opacity: .5;
-    text-decoration: line-through;
-  }
-  label{
-    background: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
-    height: 180px;
-    width: 120px;
-    border: 2px solid rgba(0,0,0,.0);
-    box-shadow: 1px 1px 7px -3px #999;
   }
   head{
     display: flex;

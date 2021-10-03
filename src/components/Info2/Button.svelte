@@ -1,6 +1,6 @@
 <script>
   import Icon_gift_box from '../../icons/icon_gift_box.svelte'
-  import {open} from '../../stores/functions'
+  import {open} from '../../lib/firebase'
 
   const handleclick = () => {
     open.set(true)

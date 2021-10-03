@@ -3,7 +3,7 @@
   import Info2 from './Info2/_index.svelte'
   import Form from './Form/_index.svelte'
   import List from './List/_index.svelte'
-  import {open} from '../stores/functions'
+  import {open} from '../lib/firebase'
 </script>
 
 <main class="scroll">

@@ -1,7 +1,5 @@
 <script>
-  import {getAuth} from 'firebase/auth'
-  import {getFirestore, doc, setDoc, onSnapshot} from 'firebase/firestore'
-  import {cozinha, cama, banho, handleSubmit} from '../../lib/firebase_db'
+  import {list, handleSubmit} from '../../lib/firebase'
 
   let presence = 'yes'
   let quantity = '0'
@@ -33,8 +31,8 @@
     </div>
 
     <div>
-      <h3>Você ecolheu {[...$cama,...$cozinha,...$banho].length} 
-        presente{[...$cozinha, ...$cama, ...$banho].length == 1 ? '':"s"}</h3>
+      <h3>Você ecolheu {$list.length} 
+        presente{$list.length == 1 ? '':"s"}</h3>
     </div>
 
     <div class="name">

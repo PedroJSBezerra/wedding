@@ -3,20 +3,7 @@
 	import Main from "./components/_Main.svelte"
 	import Login from "./components/_Login.svelte"
 	import Loading from "./components/_Loading.svelte"
-	import {loged} from './stores/functions'
-	
-	import {getAuth, onAuthStateChanged} from 'firebase/auth'
-
-	//login observer function
-	onAuthStateChanged( getAuth(), (user) => {
-		if(user){
-			console.log('AuthState: Loged.')
-			loged.set(true)
-		}else{
-			console.log('AuthState: not loged.')
-			loged.set(false)
-		}
-	})
+	import { loged } from './lib/firebase'
 
 </script>
 
