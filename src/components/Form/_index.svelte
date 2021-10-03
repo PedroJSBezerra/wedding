@@ -1,17 +1,17 @@
 <script>
-  import {list, handleSubmit} from '../../lib/firebase'
+  import {list, formSubmit} from '../../lib/firebase'
 
   let presence = 'yes'
   let quantity = '0'
   let name = ''
-
-
+  $: console.log($list.forEach(section => console.log(section)))
+  
 
 </script>
 
 <section>
 
-  <form class="background" action="" on:submit|preventDefault={handleSubmit}>
+  <form class="background" action="" on:submit|preventDefault={formSubmit(presence, quantity, name)}>
     <div class="confirm">
       <h3>Confirmar presença?</h3>
       <input type="radio" name="presence" bind:group={presence} id="yes" value="yes" checked>

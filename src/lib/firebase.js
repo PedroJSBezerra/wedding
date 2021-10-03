@@ -47,7 +47,9 @@ onAuthStateChanged( getAuth(), (user) => {
 //========== EXPORT FUNCTIONS ==============
 //Login function
 export const login = () =>{
-  signInWithPopup( getAuth(), new GoogleAuthProvider())
+  let auth = getAuth()
+  let GoogleAuthProvider = new GoogleAuthProvider()
+  signInWithPopup( auth, GoogleAuthProvider)
 }
 //set item owner
 export const setOwner = (item, index, name) => {
@@ -94,17 +96,9 @@ export const handleChecked = (item) => {
   return response
 }
 //form submit
-export const handleSubmit = (e) => {
+export const formSubmit = (presence, quantity, name) => {
   const db = getFirestore()
-  let data = {
-    uid: user.uid,
-    displayName: user.displayName,
-    photo: user.photoURL,
-    phone: user.phoneNumber,
-    email: user.email,
-    presence: presence,
-    quantity: quantity,
-    list:[...$cama,...$cozinha,...$banho]
-  }
-  setDoc(doc(db, "users", user.uid), data)
+  let uid = getAuth().currentUser.uid
+  
+  // setDoc(doc(db, "users", uid), data)
 }
