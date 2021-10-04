@@ -1,52 +1,16 @@
 <script>
-  import {getAuth} from 'firebase/auth'
-  import {getFirestore, doc, onSnapshot} from 'firebase/firestore'
-
-  import { fly, fade } from 'svelte/transition'
-
-  const user = getAuth().currentUser
-  const db = getFirestore()
-  let cozinha = []
-  let cama = []
-  let banho = []
-
-  onSnapshot(doc(db, "list", "Cozinha"), (doc) => {
-    let lst = []
-    Object.values(doc.data()).forEach((item, index, array) => {
-      if(item.owner_id === user.uid){
-        lst.push(item)
-      }
-    })
-    cozinha = lst
-  })
-  onSnapshot(doc(db, "list", "Cama"), (doc) => {
-    let lst = []
-    Object.values(doc.data()).forEach((item, index, array) => {
-      if(item.owner_id === user.uid){
-        lst.push(item)
-      }
-    })
-    cama = lst
-  })
-  onSnapshot(doc(db, "list", "Banho"), (doc) => {
-    let lst = []
-    Object.values(doc.data()).forEach((item, index, array) => {
-      if(item.owner_id === user.uid){
-        lst.push(item)
-      }
-    })
-    banho = lst
-  })
+  import { myList } from '../../lib/firebase'
+  import { fly } from 'svelte/transition'
   
 </script>
 
-{#if [...cozinha, ...cama, ...banho].length > 0}
+{#if $myList.length > 0}
   <h1>
     Você escolheu 
-    {#key [...cozinha, ...cama, ...banho].length}
-      <span in:fly={{ y: 20 }}>{[...cozinha, ...cama, ...banho].length}</span> 
+    {#key $myList.length}
+      <span in:fly={{ y: 20 }}>{$myList.length}</span> 
     {/key}
-    presente{[...cozinha, ...cama, ...banho].length == 1 ? '':"s"}
+    presente{$myList.length == 1 ? '':"s"}
   </h1>
 {:else}
   <h1>
@@ -54,10 +18,10 @@
   </h1>
 {/if}
 <ul>
-  {#each [...cozinha, ...cama, ...banho] as item}
+  {#each $myList as item}
     <li 
-      in:fly={{ y: 20 }}
-      out:fly={{ y: 20}}
+      in:fly={{ y: 40 }}
+      out:fly={{x:200}}
     >{item.name}
     </li> 
   {/each}

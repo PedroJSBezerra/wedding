@@ -1,13 +1,14 @@
 //============= IMPORT DATA ================
 import { initializeApp } from 'firebase/app'
 import {getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider} from 'firebase/auth'
-import { doc, collection, updateDoc, onSnapshot, getFirestore, } from 'firebase/firestore'
+import { doc, collection, updateDoc, onSnapshot, getFirestore} from 'firebase/firestore'
 import { writable } from 'svelte/store'
 //================ Export data =============
 //svelte writable data
 export const open = writable(false)
 export const loged = writable('loading')
 export const list = writable([])
+export const myList = writable([])
 //============= FIREBASE INITIALIZE ============
 initializeApp({
   apiKey: "AIzaSyBrfNZCYnSXsVIGrIzEq7fBypkQJOK-ADk",
@@ -18,21 +19,33 @@ initializeApp({
   appId: "1:557245127862:web:b1bc75b5400ce728c45a17"
 })
 // ========= REALTIME DATA UPDATE ===========
+
 //database snapshots
 onSnapshot(collection(getFirestore(), "list"), (doc) => {
+  let uid = getAuth().currentUser.uid
+  
   let docs = []
+  let items = []
+  
   doc.forEach(doc => {
-    let id = doc.id
-    let data = Object.values(doc.data())
 
     let item = {
-      id,
-      data
+      id: doc.id,
+      data: Object.values(doc.data()),
     }
+
+    //pust items to array
     docs.push(item)
+    //pust items to array
+    Object.values(doc.data()).forEach(item => {
+      if(item.owner_id != ''){
+        items.push(item)
+      }
+    })
   })
-  
+  //set data to global writable vars
   list.set(docs)
+  myList.set(items)
 })
 //login observer function
 onAuthStateChanged( getAuth(), (user) => {
@@ -48,8 +61,8 @@ onAuthStateChanged( getAuth(), (user) => {
 //Login function
 export const login = () =>{
   let auth = getAuth()
-  let GoogleAuthProvider = new GoogleAuthProvider()
-  signInWithPopup( auth, GoogleAuthProvider)
+  let googleProvider = new GoogleAuthProvider()
+  signInWithPopup( auth, googleProvider)
 }
 //set item owner
 export const setOwner = (item, index, name) => {
@@ -75,7 +88,7 @@ export const setOwner = (item, index, name) => {
   })
 }
 //function to check check item owner
-export const check_owner = (item) => {
+export const handledisabled = (item) => {
   let user = getAuth().currentUser.uid
   let id = item.owner_id
   let disabled
@@ -99,6 +112,8 @@ export const handleChecked = (item) => {
 export const formSubmit = (presence, quantity, name) => {
   const db = getFirestore()
   let uid = getAuth().currentUser.uid
-  
+  let lst = []
+  list.subscribe(i => lst = i)
+  console.log(lst)
   // setDoc(doc(db, "users", uid), data)
 }

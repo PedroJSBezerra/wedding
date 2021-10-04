@@ -1,6 +1,6 @@
 <script>
-  import { fly, fade } from 'svelte/transition'
-  import { setOwner, check_owner, handleChecked } from '../../lib/firebase'
+  import { fly } from 'svelte/transition'
+  import { setOwner, handledisabled, handleChecked } from '../../lib/firebase'
 
   export let section
   export let item
@@ -12,7 +12,7 @@
   <input 
     id={item.name}
     type="checkbox" 
-    disabled={check_owner(item)}
+    disabled={handledisabled(item)}
     checked={handleChecked(item)}
     on:click={() => {setOwner(item, index, section.id)}}
   >

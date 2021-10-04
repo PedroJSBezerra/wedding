@@ -1,10 +1,10 @@
 <script>
-  import {list, formSubmit} from '../../lib/firebase'
+  import { myList, formSubmit } from '../../lib/firebase'
 
   let presence = 'yes'
   let quantity = '0'
   let name = ''
-  $: console.log($list.forEach(section => console.log(section)))
+  
   
 
 </script>
@@ -31,8 +31,8 @@
     </div>
 
     <div>
-      <h3>Você ecolheu {$list.length} 
-        presente{$list.length == 1 ? '':"s"}</h3>
+      <h3>Você ecolheu {$myList.length} 
+        presente{$myList.length == 1 ? '':"s"}</h3>
     </div>
 
     <div class="name">

@@ -4,8 +4,8 @@
   import Card from './Card.svelte'
   import Icon_close from '../../icons/icon_close.svelte'
   import { open } from '../../lib/firebase'
-  import { fly, fade } from 'svelte/transition'
-  import { list, setOwner, check_owner, handleChecked } from '../../lib/firebase'
+  import { fly } from 'svelte/transition'
+  import { list } from '../../lib/firebase'
  
 </script>
 
