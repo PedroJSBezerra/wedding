@@ -3,7 +3,7 @@
 
 <section class='info bg_wood'>
   <div class="box bg_flower">
-      <h1 class="title">Tayane <br> e Pedro</h1>
+      <h1 class="title">Vanda <br> e Visão</h1>
       <div class="icon">
       </div>
       <span>. . . . vão casar . . . .</span>

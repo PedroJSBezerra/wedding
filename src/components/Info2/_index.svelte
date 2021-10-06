@@ -18,7 +18,7 @@
     <div class="icon">
       <Icon_map />
     </div>
-    <p>Rua Guiomar <br> Carneiro 14, <br> Croatá II, Pacajús/Ce</p>
+    <p>Rua Marvel <br> Casa 14, <br> Westview, New Jersey</p>
   </Card>
 
   <Card >

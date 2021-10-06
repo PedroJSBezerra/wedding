@@ -19,10 +19,8 @@ initializeApp({
   appId: "1:557245127862:web:b1bc75b5400ce728c45a17"
 })
 // ========= REALTIME DATA UPDATE ===========
-
 //database snapshots
 onSnapshot(collection(getFirestore(), "list"), (doc) => {
-  let uid = getAuth().currentUser.uid
   
   let docs = []
   let items = []
